@@ -10,7 +10,7 @@ Configure Confirm that you are using the local credentials, and set the region n
 aws configure
 ```
 
-##Install dependencies and create the React project
+## Install dependencies and create the React project
 
 ``` bash
 nvm i v8
@@ -43,7 +43,7 @@ amplify push
 amplify publish
 ```
 
-Use the **Hosting endpoint** to browse inside you React application.
+Use the **Hosting endpoint** to browse inside your React application.
 
 ## Authentication with Amazon Cognito
 
