@@ -1,10 +1,10 @@
-# Create a React project from Scratch
+# Create a React project from scratch and deploy with Amplify
 
-Work inside your AWS Cloud9 environment.
+Work inside your AWS Cloud9 or local environment.
 
-## Configure local environment
+## Configure your environment
 
-Configure Confirm that you are using the local credentials, and set the region name to **`us-east-1`** and the output format to **`json`**. 
+* In AWS Cloud9 configure the AWS CLI using the local credentials, and set the region name to **`us-east-1`** and the output format to **`json`**. 
 
 ``` bash
 aws configure
@@ -12,9 +12,21 @@ aws configure
 
 ## Install dependencies and create the React project
 
+Update Node.js to the minimal version of 10.
+
 ``` bash
-nvm i v8
+nvm i v10
+```
+
+Install Amplify CLI tool https://github.com/aws-amplify/amplify-cli
+
+``` bash
 npm install -g @aws-amplify/cli
+```
+
+Create React project.
+
+``` bash
 npx create-react-app myapp
 cd myapp
 npm install @material-ui/core
@@ -24,6 +36,12 @@ npm install @material-ui/core
 
 ``` bash
 amplify init
+```
+
+
+
+
+``` bash
 npm install --save aws-amplify
 npm install --save aws-amplify-react
 ```
