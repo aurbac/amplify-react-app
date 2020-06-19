@@ -2,22 +2,16 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import Auth from '@aws-amplify/auth';
-
-import { withAuthenticator } from 'aws-amplify-react';
-
-import awsconfig from './aws-exports';
-
-import Analytics from '@aws-amplify/analytics';
-
 import Button from '@material-ui/core/Button';
 
-// Retrieve temporary AWS credentials and sign requests
-Auth.configure(awsconfig);
-// Send analytics events to Amazon Pinpoint
-Analytics.configure(awsconfig);
+import Amplify, { Auth } from 'aws-amplify';
+import Analytics from '@aws-amplify/analytics';
+import awsconfig from './aws-exports';
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
+Amplify.configure(awsconfig);
 
 class App extends Component {
+  
   constructor(props) {
     super(props);
     this.handleAnalyticsClick = this.handleAnalyticsClick.bind(this);
@@ -43,27 +37,28 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <br/>
-        <div className="App-intro">
-          <Button variant="contained" color="primary" className="App-button" onClick={this.handleAnalyticsClick}>Send Analytics Event</Button>
-          {this.state.analyticsEventSent}
-          <div>{this.state.resultHtml}</div>
-        </div>
-      </header>
-    </div>
+        <AmplifySignOut />
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p>
+            Edit <code>src/App.js</code> and save to reload.
+          </p>
+          <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn React
+          </a>
+          <br/>
+          <div className="App-intro">
+            <Button variant="contained" color="primary" className="App-button" onClick={this.handleAnalyticsClick}>Send Analytics Event</Button>
+            {this.state.analyticsEventSent}
+            <div>{this.state.resultHtml}</div>
+          </div>
+        </header>
+      </div>
     );
   }
 }

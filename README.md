@@ -4,28 +4,25 @@
 
 Work inside your AWS Cloud9 or local environment.
 
-## Configure your environment
+## Configure your environment with IAM user credentials
+
+Firstly, [create an **IAM** user with **Programmatic access**](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console).
+
+Configure your AWS CLI with your credentials (access key and secret key).
 
 ``` bash
 aws configure
 ```
 
-- In AWS Cloud9 configure the AWS CLI as follows. 
-    - AWS Access Key ID: **(Use default)**
-    - AWS Secret Access Key: **(Use default)**
+- [Configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html#cli-quick-configuration) as follows.
+    - AWS Access Key ID: **(Use your IAM user credentials)**
+    - AWS Secret Access Key: **(Use your IAM user credentials)**
     - Default region name [us-east-1]: **us-east-1**
     - Default output format [json]: **json**
-- In your local environment [configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html#cli-quick-configuration) with your own IAM credentials.
 
 ## Install dependencies and create the React project
 
-Update Node.js to the minimal version of 10.
-
-``` bash
-nvm i v10
-```
-
-Install Amplify CLI tool https://github.com/aws-amplify/amplify-cli
+Install Amplify CLI tool https://docs.amplify.aws/cli/start/install
 
 ``` bash
 npm install -g @aws-amplify/cli
@@ -83,31 +80,15 @@ https://docs.aws.amazon.com/cli/latest/userguide/cli-multiple-profiles.html
 amplify add analytics
 ```
 
+? Select an Analytics provider **Amazon Pinpoint**
+
 ? Provide your pinpoint resource name: **myapp**
 
 Adding analytics would add the Auth category to the project if not already added.
 
 ? Apps need authorization to send analytics events. Do you want to allow guests and unauthenticated users to send analytics events? (we recommend you allow this when getting started) **Yes**
 
-``` bash
-amplify push
-```
-
-? Are you sure you want to continue? **Yes**
-
-## Hosting with Amazon S3
-
-``` bash
-amplify add hosting
-```
-
-? Select the environment setup: **DEV (S3 only with HTTP)**
-
-? hosting bucket name **myapp-20190710043203-hostingbucket** (Use default name)
-
-? index doc for the website **index.html**
-
-? error doc for the website **index.html**
+Push to create these changes in the cloud.
 
 ``` bash
 amplify push
@@ -115,13 +96,16 @@ amplify push
 
 ? Are you sure you want to continue? **Yes**
 
-``` bash
-amplify publish
-```
+After resources are created you will receive the URL for Amazon Pinpoint console to track your app events. Now you can [configure your app and record events](https://docs.amplify.aws/lib/analytics/getting-started/q/platform/js#configure-your-app).
 
-Use the **Hosting endpoint** to browse inside your React application.
 
 ## Authentication with Amazon Cognito
+
+Check your current environment.
+
+``` bash
+amplify status
+```
 
 By adding Analytics, the authentication module was added. Update with the following command using the default values.
 
@@ -131,14 +115,44 @@ amplify auth update
 
 What do you want to do? **Apply default configuration without Social Provider (Federation)**
 
+Push to create these changes in the cloud.
+
 ``` bash
 amplify push
 ```
 
+? Are you sure you want to continue? **Yes**
+
 ## Use Authentication and send events to Cognito
 
-Replace your **src/App.js** with the following file [src/App.js](src/App.js) and publish your app.
+We are going to [use pre-built UI component for Authentication](https://docs.amplify.aws/lib/auth/getting-started/q/platform/js#option-1-use-pre-built-ui-components) and [record custom events to Amazon Pinpoint](https://docs.amplify.aws/lib/analytics/record/q/platform/js#recording-custom-events).
+
+First, install the @aws-amplify/ui-react library as well as aws-amplify if you have not already:
+
+``` bash
+npm install aws-amplify @aws-amplify/ui-react
+```
+
+Replace your **src/App.js** with the following file [src/App.js](src/App.js) and **src/index.js** with the following file [src/index.js](src/index.js).
+
+## Hosting with Amazon S3 and Amazon CloudFront
+
+``` bash
+amplify add hosting
+```
+
+? Select the plugin module to execute **Amazon CloudFront and S3**
+
+? Select the environment setup: **PROD (S3 with CloudFront using HTTPS)**
+
+? hosting bucket name **myapp-20190710043203-hostingbucket** (Use default name)
+
+You can now publish your app.
 
 ``` bash
 amplify publish
 ```
+
+? Are you sure you want to continue? **Yes**
+
+Use the **Hosting endpoint** to browse inside your React application.
