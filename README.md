@@ -1,4 +1,4 @@
-# Create a React project from scratch and deploy with Amplify
+# Create a React App from scratch and deploy with Amplify CLI
 
 ![Diagram](images/diagram.png)
 
@@ -15,8 +15,8 @@ aws configure
 ```
 
 - [Configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html#cli-quick-configuration) as follows.
-    - AWS Access Key ID: **(Use your IAM user credentials)**
-    - AWS Secret Access Key: **(Use your IAM user credentials)**
+    - AWS Access Key ID: **# YOUR_ACCESS_KEY_ID**
+    - AWS Secret Access Key: **# YOUR_SECRET_ACCESS_KEY**
     - Default region name [us-east-1]: **us-east-1**
     - Default output format [json]: **json**
 
@@ -38,7 +38,7 @@ npm install --save aws-amplify
 npm install --save aws-amplify-react
 ```
 
-## Initialize your project with Amplify
+## Initialize your project with Amplify CLI
 
 ``` bash
 amplify init
@@ -123,7 +123,7 @@ amplify push
 
 ? Are you sure you want to continue? **Yes**
 
-## Use Authentication and send events to Cognito
+## Use Authentication and send events to Amazon Cognito
 
 We are going to [use pre-built UI component for Authentication](https://docs.amplify.aws/lib/auth/getting-started/q/platform/js#option-1-use-pre-built-ui-components) and [record custom events to Amazon Pinpoint](https://docs.amplify.aws/lib/analytics/record/q/platform/js#recording-custom-events).
 
