@@ -4,7 +4,7 @@ import './App.css';
 
 import Button from '@material-ui/core/Button';
 
-import Amplify, { Auth } from 'aws-amplify';
+import Amplify from 'aws-amplify';
 import Analytics from '@aws-amplify/analytics';
 import awsconfig from './aws-exports';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
@@ -21,11 +21,11 @@ class App extends Component {
   handleAnalyticsClick() {
       Analytics.record('Amplify Event')
         .then( (evt) => {
-            const url = 'https://console.aws.amazon.com/pinpoint/home/?region=us-east-1#/apps/'+awsconfig.aws_mobile_analytics_app_id+'/analytics/events';
+            const url = 'https://console.aws.amazon.com/pinpoint/home/?#/apps/'+awsconfig.aws_mobile_analytics_app_id+'/analytics/events';
             let result = (<div>
               <p>Event Submitted.</p>
               <p>Events sent: {++this.state.eventsSent}</p>
-              <a href={url} target="_blank">View Events on the Amazon Pinpoint Console</a>
+              <a href={url} style={{ color: '#fff' }} target="_blank">View Events on the Amazon Pinpoint Console</a>
             </div>);
             this.setState({
                 'analyticsEventSent': true,
