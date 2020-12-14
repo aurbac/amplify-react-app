@@ -9,6 +9,12 @@ Work in your local or [AWS Cloud9](https://aws.amazon.com/cloud9/) environment w
 1. [AWS CLI configured with IAM Credentials](https://docs.aws.amazon.com/cli/latest/reference/configure/)
 2. [Amplify CLI](https://docs.amplify.aws/cli/start/install)
 
+If you are using Cloud9 remove aws_session_token variable from aws credentials with the following command:
+
+``` bash
+sed -i 's/aws_session_token =//g' ~/.aws/credentials
+```
+
 ## Install dependencies and create the React application
 
 Install Amplify CLI tool https://docs.amplify.aws/cli/start/install
